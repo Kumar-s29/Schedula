@@ -18,7 +18,7 @@ dotenv.config();
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
       synchronize: false,
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : true,
     }),
     AuthModule,
     UsersModule,
@@ -30,3 +30,4 @@ dotenv.config();
   ],
 })
 export class AppModule {}
+
