@@ -1,4 +1,3 @@
-// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
@@ -16,13 +15,10 @@ dotenv.config();
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.HOST,
-      port: 5432,
-      username: 'postgres',
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
       synchronize: false,
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
     }),
     AuthModule,
     UsersModule,
